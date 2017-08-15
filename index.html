@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>	
+		<title>乐橙H5移动页面</title>
+		<link rel="stylesheet" href="css/animate.css" />
+		<link rel="stylesheet" href="css/swiper.3.1.2.min.css">
+		<script src="js/swiper.3.1.2.min.js"></script>
+	</head>
+	<body>
+		<div class="content" id="loading">
+			<div class="load">
+			    <img src="img/YC00_load.png"/>
+			    	<div class="loading">
+			    		<img src="img/YC00_loadbg.png" />
+			    	</div>
+			</div>			
+		</div>
+
+		<div class="swiper-container">
+		    <div class="swiper-wrapper">	
+		        <div class="swiper-slide" id="p1"> 
+		        	<div class="lc1">
+		        		<img src="img/logo.png" class="pg1"/>
+		        		<img src="img/router.png" class="pg2"/>
+		        		<img src="img/product.png" class="pg3"/>
+		        		<img src="img/infor.png" class="pg4"/>
+		        		<img src="img/info1.png" class="pg5"/>
+		        		<img src="img/info2.png" class="pg6"/>
+		        		<img src="img/info3.png" class="pg7"/>
+		        		<img src="img/info4.png" class="pg8"/>
+		        		<div class="bottomText">招招都是功夫</div>
+		        	</div>
+		        </div>	
+		         <div class="swiper-slide"> 
+		        	<div class="lc2">
+		        		<img data-src="img/sec_logo.png" class="pg1"/>
+		        		<img data-src="img/fir_title.png" class="pg2"/>
+		        		<img data-src="img/sec_info.png" class="pg3"/>
+		        		<img data-src="img/bigInfo.png" class="pg4"/>
+		        		<img data-src="img/super_info.png" class="pg5"/>
+		        		<div class="bottomText">性能强大</div>
+		        	</div>
+		        </div>
+		         <div class="swiper-slide"> 
+		        	<div class="lc3">
+		        		<img data-src="img/sec_logo.png" class="pg1"/>
+		        		<img data-src="img/thi_title.png" class="pg2"/>
+		        		<img data-src="img/thi_info.png" class="pg3"/>
+		        		<img data-src="img/highSuper.png" class="pg4"/>
+		        		<img data-src="img/thi_info2.png" class="pg5"/>
+		        		<div class="bottomText">让你越用越爽</div>
+		        	</div>
+		        </div>
+		         <div class="swiper-slide"> 
+		        	<div class="lc4">
+		        		<img data-src="img/sec_logo.png" class="pg1"/>
+		        		<img data-src="img/for_title.png" class="pg2"/>
+		        		<img data-src="img/iphone.png" class="pg3"/>
+		        		<img data-src="img/birdInfo.png" class="pg4"/>
+		        		<div class="bottomText">了解更多</div>
+		        	</div>
+		        </div>
+		         <div class="swiper-slide"> 
+		        	<div class="lc5">
+		        		<img data-src="img/sec_logo.png" class="pg1"/>
+		        		<img data-src="img/last_title.png" class="pg2"/>
+		        		<img data-src="img/last_info.png" class="pg3"/>
+		        		<img data-src="img/erweima.png" class="pg4"/>
+		        		<div class="bottomImage">
+		        			<img data-src="img/last_bottom.png" class="bottom_info"/>
+		        		</div>
+		        	</div>
+		        </div>
+		    </div>
+		    <div id="arrow">
+		    	
+		    </div>
+		</div>
+		<script>
+			
+		 	(function(_window){
+		        var docEl = _window.document.documentElement,
+		        resizeEvt = 'orientationchange' in _window ? 'orientationchange' : 'resize';        
+		        function s() {
+		          var clientHeight = docEl.clientHeight;
+		          docEl.style.fontSize = 100 * (clientHeight /568) + 'px';
+		        }
+		        _window.addEventListener(resizeEvt, s, false);
+		        s();
+	      	})(window);
+		    
+			function gid(id){
+				return document.getElementById(id);
+			}
+			var load=gid('loading'),
+				arrow=gid('arrow'),				
+				container=gid('container');
+				activeIndex=gid("p1");
+			
+			window.addEventListener('load',function(){
+				//初始化滑动插件
+				var yc=new Swiper('.swiper-container',{
+					direction : 'vertical',
+					effect : 'slide',
+					loop:true,
+					onTransitionStart:function(obj){
+						
+					},
+					onTransitionEnd:function (obj){
+						
+					}
+				});	
+				//预加载图片
+				var imgs=document.querySelectorAll('img[data-src]');
+				var imgLen=imgs.length;
+				var num=0;
+				for(var i=0;i<imgs.length;i++){
+					!function(index){
+						var img=new Image(),u=imgs[index].getAttribute('data-src');					
+						img.onload=function(){
+							num++;
+							imgs[index].src=u;
+							if(num==imgLen){
+								load.style.display="none";
+								activeIndex.className="swiper-slide";
+								setTimeout(function (){
+									activeIndex.className="swiper-slide swiper-slide-active";
+								},100)
+							}
+						};
+						img.src=u;
+					}(i);					
+				}
+			});
+		</script>
+		
+		
+	</body>
+</html>
